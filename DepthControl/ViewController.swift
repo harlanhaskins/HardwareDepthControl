@@ -8,10 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DepthReaderDelegate {
+  @IBOutlet var imageView: UIImageView!
+
   let reader = DepthReader()
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    reader.delegate = self
+  }
+
+  func depthReader(_ depthReader: DepthReader, didOutputDepthImage image: CIImage) {
+    imageView.image = UIImage(ciImage: image)
   }
 }
 
